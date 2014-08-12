@@ -1,3 +1,8 @@
 WW2D
 ====
-Readme will added later
+For launch need 
+
+libpng16-16.dll
+SDL2.dll
+SDL2_image.dll
+zlib1.dll
