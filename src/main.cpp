@@ -1,7 +1,6 @@
-#include "gameapp.cpp"
-#include "wrestler.cpp"
-
 #include <SDL2/SDL_image.h>
+#include <gameapp.h>
+#include <wrestler.h>
 
 #define WIDHT 640
 #define HEIGHT 480
