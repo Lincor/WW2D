@@ -84,7 +84,7 @@ bool RenderFunk()
 
 bool LoadFunk()
 {
-	wrestler_texture = IMG_LoadTexture(game->render, "wrestler.png");
+	wrestler_texture = IMG_LoadTexture(game->render, "res/wrestler.png");
 	return true;
 }
 
