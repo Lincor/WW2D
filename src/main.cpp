@@ -1,7 +1,7 @@
 #include "gameapp.cpp"
 #include "wrestler.cpp"
 
-#include <SDL2\SDL_image.h>
+#include <SDL2/SDL_image.h>
 
 #define WIDHT 640
 #define HEIGHT 480
@@ -16,7 +16,7 @@ int camerax,cameray;
 
 bool KeyFunk()
 {
-	if(game->Input_KeyDown(SDL_SCANCODE_ESCAPE))return false;
+	if(game->Input_KeyDown(SDL_SCANCODE_ESCAPE)) return false;
 
 	if(game->Input_KeyDown(SDL_SCANCODE_W))wrestler->MoveUp();
 	if(game->Input_KeyDown(SDL_SCANCODE_S))wrestler->MoveDown();

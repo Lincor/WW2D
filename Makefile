@@ -1,5 +1,4 @@
-SOURCES = main.o gameapp.o wrestler.o
-all: $(SOURCES)
-  c++ -o ww2d $(SOURCES)
+all:
+	make -C src
 clean:
-  rm -f *.o ww2d
+	rm src/*.o ww2d

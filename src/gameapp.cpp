@@ -1,4 +1,4 @@
-#include <SDL2\SDL.h>
+#include <SDL2/SDL.h>
 #include <stdio.h>
 
 #define GETA(col)		((col)>>24)
