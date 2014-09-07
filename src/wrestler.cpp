@@ -1,32 +1,29 @@
 #include <SDL2/SDL.h>
-#include <gameapp.h>
-#include <wrestler.h>
+#include <gameapp.hpp>
+#include <wrestler.hpp>
 
-SDL_Rect Wrestler::GetSource(float time)
-{
+SDL_Rect Wrestler::GetSource(float time) {
 	int discretetime = (int)(time*6);
 
-	SDL_Rect rect={0,0,36,46};
-		
-	switch(state)
-	{
-		case W_IDLE:
-		case W_RUN:
-			rect.x=discretetime%8*36;
-			break;
-		case W_JUMP:
-			rect.x=36*8;
-			break;
-		case W_ATTACK:
-			rect.x=36*9+(discretetime)%2*36;
-			break;
+	SDL_Rect rect= {0,0,36,46};
+
+	switch(state) {
+	case W_IDLE:
+	case W_RUN:
+		rect.x=discretetime%8*36;
+		break;
+	case W_JUMP:
+		rect.x=36*8;
+		break;
+	case W_ATTACK:
+		rect.x=36*9+(discretetime)%2*36;
+		break;
 	}
 
 	return rect;
 }
 
-SDL_Rect Wrestler::GetRect(int camerax,int height,int scale)
-{
+SDL_Rect Wrestler::GetRect(int camerax,int height,int scale) {
 	SDL_Rect rect = {camerax,height-64,36*scale,46*scale};
 	rect.x+=posx;
 	rect.y-=posy/3;
@@ -38,64 +35,54 @@ SDL_Rect Wrestler::GetRect(int camerax,int height,int scale)
 	return rect;
 }
 
-SDL_Point Wrestler::GetAnchor()
-{
+SDL_Point Wrestler::GetAnchor() {
 	SDL_Point anchor = {orientation?10:(36-10),46};
 	return anchor;
 }
 
-void Wrestler::MoveRight()
-{
+void Wrestler::MoveRight() {
 	horizontal_speed+=100;
-	orientation=false;
+	orientation=RIGHT;
 	state = W_RUN;
 	timetoidle=0.4;
 }
 
-void Wrestler::MoveLeft()
-{
+void Wrestler::MoveLeft() {
 	horizontal_speed-=100;
-	orientation=true;
+	orientation=LEFT;
 	state = W_RUN;
 	timetoidle=0.4;
 }
 
-void Wrestler::MoveUp()
-{
+void Wrestler::MoveUp() {
 	depth_speed+=100;
 	state = W_RUN;
 	timetoidle=0.4;
 }
 
-void Wrestler::MoveDown()
-{
+void Wrestler::MoveDown() {
 	depth_speed-=100;
 	state = W_RUN;
 	timetoidle=0.4;
 }
 
-void Wrestler::SitDown()
-{
+void Wrestler::SitDown() {
 	state=W_SIT;
 }
 
-void Wrestler::Jump()
-{
-	if(state!=W_JUMP)
-	{
+void Wrestler::Jump() {
+	if(state!=W_JUMP) {
 		state=W_JUMP;
 		vertical_accselerate=17;
 	}
 }
 
-void Wrestler::Attack()
-{
+void Wrestler::Attack() {
 	state=W_ATTACK;
 	timetoidle=0.5;
 }
 
-void Wrestler::Update(float ellapsedtime)
-{
+void Wrestler::Update(float ellapsedtime) {
 	posx+=horizontal_speed*ellapsedtime;
 	posy+=depth_speed*ellapsedtime;
 
@@ -106,8 +93,7 @@ void Wrestler::Update(float ellapsedtime)
 	bool infly = height>0;
 	height+=vertical_accselerate;
 
-	if(height<0)
-	{
+	if(height<0) {
 		height=0;
 		vertical_accselerate=0;
 		if(infly)
@@ -118,12 +104,10 @@ void Wrestler::Update(float ellapsedtime)
 	if(posx>ring->sizex)posx=ring->sizex;
 	if(posy>ring->sizey)posy=ring->sizey;
 
-	if(timetoidle>0)
-	{
+	if(timetoidle>0) {
 		timetoidle-=ellapsedtime;
 
-		if(timetoidle<=0)
-		{
+		if(timetoidle<=0) {
 			timetoidle=0;
 			state=W_IDLE;
 		}

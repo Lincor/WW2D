@@ -1,8 +1,7 @@
 #ifndef WRESTLER_H
 #define WRESTLER_H
 
-enum WrestlerStates
-{
+enum WrestlerStates {
 	W_IDLE,
 	W_RUN,
 	W_JUMP,
@@ -10,44 +9,39 @@ enum WrestlerStates
 	W_SIT
 };
 
-class Ring
-{
-public: 
+class Ring {
+public:
 	int sizex;
 	int sizey;
 
-	Ring()
-	{
+	Ring() {
 		sizex=600;
 		sizey=600;
 	}
-	SDL_Rect GetRect(int camerax,int height)
-	{
+	SDL_Rect GetRect(int camerax,int height) {
 		SDL_Rect rect = {camerax,height-64-sizey/3,sizex,sizey/3};
 		return rect;
 	}
 };
 
-class Wrestler
-{
+class Wrestler {
 public:
-	float posx;
-	float posy;
-	float height;
+	double posx;
+	double posy;
+	double height;
 
-	float vertical_accselerate;
-	float horizontal_speed;
-	float depth_speed;
+	double vertical_accselerate;
+	double horizontal_speed;
+	double depth_speed;
 
 	int state;
-	bool orientation;
+	enum { LEFT, RIGHT } orientation;
 
-	float timetoidle;
+	double timetoidle;
 
 	Ring* ring;
 
-	Wrestler(Ring* ring)
-	{
+	Wrestler(Ring* ring) {
 		posx=300;
 		posy=300;
 		height=0;
@@ -57,7 +51,7 @@ public:
 		depth_speed=0;
 
 		state=W_IDLE;
-		orientation=true;
+		orientation=RIGHT;
 
 		timetoidle=0;
 
